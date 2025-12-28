@@ -19,7 +19,8 @@ def hash_password(password):
 
 @view.route('/')
 def home():
-    return render_template("index.html")
+    global users
+    return render_template("index.html", users=users)
 
 @view.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -49,11 +50,11 @@ def signup():
             "Thanks for signing up into StackAI. You'll now be updated when you get either a reply or a comment."
         )
 
+        session['user'] = pending['username']
         session.pop("verification", None)
         session.pop("pending_user", None)
-
-        flash("User created successfully!", category="info")
-        return redirect("/login")
+        
+        return redirect("/")
 
     if request.method == 'POST':
         username = request.form.get('username')
@@ -86,7 +87,7 @@ def signup():
 
         return redirect("/signup")
 
-    return render_template("signup.html")
+    return render_template("signup.html", users=users)
 
 @view.route('/login', methods=['GET', 'POST'])
 def login():
@@ -102,7 +103,7 @@ def login():
                 return redirect("/")
             Email(users[username]["credentials"]["email"], 'Someone tried to login using your email!', 'Someone just tried to login into your account using your email but failed at guessing the correct password.')
         return redirect('/login')
-    return render_template("login.html")
+    return render_template("login.html", users=users)
 
 @view.route('/report', methods=['GET', 'POST'])
 def report():
@@ -123,18 +124,18 @@ def report():
             return redirect('/forum')
         except:
             return redirect('/login')
-    return render_template("report.html")
+    return render_template("report.html", users=users)
 
 @view.route('/forum')
 def forum():
     global users, admins
     reports = read_db(users)
-    return render_template("forum.html", reports=reports, admins=admins)
+    return render_template("forum.html", reports=reports, admins=admins, users=users)
 
 @view.route("/logout")
 def logout():
-    session.permanent = False
     session.pop("user", None)
+    session.permanent = False
     return redirect('/')
 
 @view.route('/delete-post', methods=['POST'])
@@ -177,7 +178,8 @@ def view_post(username, subject):
         subject=subject,
         ai=post["ai"],
         desc=post["desc"],
-        comments=comments
+        comments=comments,
+        users=users
     )
 
 @view.route('/post/<username>/<subject>', methods=['GET', 'POST'])
@@ -214,7 +216,8 @@ def post(username, subject):
         subject=subject,
         ai=post["ai"],
         desc=post["desc"],
-        comments=post["comments"]
+        comments=post["comments"],
+        users=users
     )
 
 @view.route('/delete-comment', methods=['POST'])
