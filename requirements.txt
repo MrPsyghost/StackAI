@@ -1,0 +1,7 @@
+flask
+smtplib
+email
+hashlib
+json
+os
+random
