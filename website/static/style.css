@@ -1,0 +1,346 @@
+@font-face {
+    font-family: "Orbitron";
+    src: url(fonts/Orbitron/Orbitron-VariableFont_wght.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Bebas Neue";
+    src: url(fonts/Bebas_Neue/BebasNeue-Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "PS2P";
+    src: url(fonts/Press_Start_2P/PressStart2P-Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Google Sans";
+    src: url(fonts/Google_Sans/GoogleSans-Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background: linear-gradient(to top, rgb(201, 197, 189), rgb(177, 177, 255));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    border-radius: 1vw;
+    border: none;
+    padding: 1vw 1.5vw;
+    cursor: pointer;
+    background: #cecece;
+    font-family: "Google Sans";
+    font-size: 1vw;
+}
+
+#nav-bar {
+    background-color: white;
+    position: fixed;
+    z-index: 10;
+    height: 10%;
+    width: 97%;
+    border-radius: 1vw;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1vw;
+    padding: 0vh 1vw;
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    gap: 1vw;
+    align-items: center;
+}
+
+#brand {
+    position: fixed;
+    font-family: "PS2P";
+    top: 25%;
+    align-self: center;
+    font-size: 8vw;
+}
+
+#moto {
+    position: fixed;
+    font-family: "Google Sans";
+    top: 45%;
+    align-self: center;
+    text-align: center;
+    font-size: 100%;
+}
+
+#desc {
+    font-family: "Google Sans";
+    position: fixed;
+    text-align: center;
+    align-self: center;
+    font-size: 2vw;
+    top: 65%;
+}
+
+form {
+    position: absolute;
+    top: 10%;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-content: center;
+    text-align: center;
+    color: black;
+    font-size: 2vw;
+    font-family: "Orbitron";
+    gap: 1vw;
+    width: 50%;
+    height: auto;
+    border-radius: 1vw;
+    padding: 2vw;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+}
+
+label {
+    text-align: center;
+    align-self: center;
+    color: black;
+    font-size: 2vw;
+    font-family: "Google Sans";
+}
+
+input {
+    font-family: "Google Sans";
+    border: none;
+    border-radius: 1vw;
+    outline: none;
+    text-align: left;
+    align-self: center;
+    color: black;
+    font-size: 2vw;
+    padding: 0.75vw;
+    background-color: rgb(231, 231, 231);
+    width: auto;
+}
+
+select {
+    text-align: left;
+    align-self: center;
+    color: black;
+    font-size: 2vw;
+    padding: 0.5vw;
+    background-color: rgb(231, 231, 231);
+    width: auto;
+    border: none;
+    border-radius: 1vw;
+    font-family: "Google Sans";
+    outline: none;
+}
+
+button[type="submit"] {
+    text-align: left;
+    align-self: center;
+    color: black;
+    font-size: 2vw;
+    padding: 0.75vw;
+    background-color: aliceblue;
+    width: auto;
+    bottom: 2vw;
+    background: rgb(231, 231, 231);
+}
+
+textarea {
+    text-align: left;
+    align-self: center;
+    color: black;
+    font-size: 2vw;
+    padding: 0.75vw;
+    background-color: rgb(231, 231, 231);
+    outline: none;
+    border-radius: 1vw;
+    border: none;
+    width: auto;
+}
+
+.subject {
+    position: sticky;
+    font-family: "Google Sans";
+    align-self: left;
+    text-align: left;
+    font-size: 2vh;
+    /* z-index: 2; */
+}
+
+.ai {
+    position: relative;
+    font-family: "Google Sans";
+    text-align: left;
+    align-self: left;
+    font-size: 2.5vh;
+}
+
+.details {
+    position: relative;
+    font-family: "Google Sans";
+    text-align: left;
+    align-self: left;
+    font-size: 2.5vh;
+}
+
+.report {
+    background: #ffffff;
+    margin: 2vw;
+    padding: 1.5vw;
+    border-radius: 1vw;
+    position: sticky;
+    width: 90%;
+    align-self: center;
+}
+
+#forum {
+    margin-top: 12vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.forum-title {
+    font-family: "Orbitron";
+    border-radius: 1vw;
+    padding: 1vw;
+    text-align: center;
+    width: 17.5%;
+    font-size: 3.5vw;
+    background: #ffffff;
+}
+
+#add-report,
+#login {
+    background: rgb(231, 231, 231);
+    font-family: "Google Sans";
+    font-size: 1.5vw;
+    width: 4vw;
+    height: 4vw;
+    text-align: center;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 80%;
+    align-self: center;
+    gap: 0.5vw;
+}
+
+.input-icon {
+    position: absolute;
+    left: 0.8vw;
+    font-size: 1.2em;
+    pointer-events: none;
+    opacity: 0.6;
+    margin-bottom: 0.25vw;
+}
+
+.input-group input {
+    width: 100%;
+    padding-left: 4vw;
+    box-sizing: border-box;
+    padding-right: 3vw;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 0.8vw;
+    cursor: pointer;
+    opacity: 0.6;
+    user-select: none;
+    margin-bottom: 0.25vw;
+}
+
+.toggle-password:hover {
+    opacity: 1;
+}
+
+#user {
+    font-family: "Google Sans";
+    font-size: 2vw;
+}
+
+.report .delete,
+.report .delete2 {
+    position: absolute;
+    left: 93%;
+    margin-top: 1.75%;
+    cursor: pointer;
+    z-index: 5;
+    font-size: 1.5vw;
+}
+
+
+a {
+    text-decoration: none;
+    color: blue;
+}
+
+#comment-form {
+    position: relative;
+    background: #ffffff;
+    margin: 2vw;
+    padding: 1.5vw;
+    border-radius: 1vw;
+    position: sticky;
+    width: 90%;
+    align-self: center;
+}
+
+#comment-form input {
+    width: 92%;
+}
+
+#comment-form button {
+    width: 5%;
+    text-align: center;
+}
+
+.comment {
+    background: #ffffff;
+    font-family: "Google Sans";
+    margin: 1vw;
+    padding: 2.5vw 1.5vw;
+    border-radius: 1vw;
+    position: sticky;
+    width: 90%;
+    align-self: center;
+    font-size: 1.5vw;
+}
+
+.comment .delete3 {
+    position: absolute;
+    left: 93%;
+    margin-top: -1.2%;
+    cursor: pointer;
+    z-index: 5;
+    font-size: 1vw;
+}
+
+#logo {
+    width: 3.5vw;
+    height: 3.5vw;
+    border-radius: 1vw;
+}

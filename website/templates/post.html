@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}{{ subject }} | StackAI{% endblock %}
+{% block nav %}
+<div class="nav-left">
+    <img src="./static/favicon.png" id="logo">
+    <button id="h">Home</button>
+    <button id="f">Forum</button>
+</div>
+
+<div class="nav-right">
+    {% if session.get("user") %}
+    <h1 id="user">Hello, <strong>{{ session["user"] }}</strong></h1>
+    <button id="lo">Log Out</button>
+    {% else %}
+    <button id="su">Sign Up</button>
+    <button id="li">Log In</button>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="report" style="margin-top: 8%;">
+    {% if username == session.get('user') %}
+    <button class="delete2" data-subject="{{ subject }}">🗑</button>
+    {% endif %}
+
+    <div class="subject">
+        <h2>
+            "{{ subject }}"
+            <span>by {{ username }}</span>
+        </h2>
+    </div>
+
+    <div class="ai">
+        <strong>AI:</strong> {{ ai }}
+    </div>
+
+    <div class="details">
+        <strong>Description:</strong> {{ desc }}
+    </div>
+</div>
+{% if comments %}
+{% for comment in comments %}
+<div class="comment">
+    {% if comment.user == session.get('user') %}
+    <button class="delete3" data-owner="{{ username }}" data-subject="{{ subject }}" data-index="{{ loop.index0 }}">
+        🗑
+    </button>
+    {% endif %}
+    <strong>{{ comment.user }}</strong>:
+    {{ comment.text }}
+</div>
+{% endfor %}
+{% endif %}
+
+{% if session.get("user") %}
+<form id="comment-form" method="POST" action="/post/{{ username }}/{{ subject | urlencode }}">
+    <div>
+        <input type="text" name="comment" placeholder="Add a comment..." required>
+        <button type="submit">+</button>
+    </div>
+</form>
+{% else %}
+<p><a href="/login">Log in</a> to comment.</p>
+{% endif %}
+{% endblock %}

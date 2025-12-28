@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title%}{% endblock %}</title>
+</head>
+
+<body>
+    <div id="nav-bar">
+        {% block nav %}{% endblock %}
+    </div>
+    {% block content %}{% endblock %}
+    <script>
+        const h = document.getElementById("h");
+        const f = document.getElementById("f");
+        const su = document.getElementById("su");
+        const li = document.getElementById("li");
+        const lo = document.getElementById("lo");
+        const add_report = document.getElementById("add-report");
+        const login = document.getElementById("login");
+        const loginToComment = document.getElementById("login-to-comment");
+        
+        if (h) h.onclick = () => location.href = "/";
+        if (f) f.onclick = () => location.href = "/forum";
+        if (add_report) add_report.onclick = () => location.href = "/report";
+        if (login) login.onclick = () => location.href = "/login";
+        if (su) su.onclick = () => location.href = "/signup";
+        if (li) li.onclick = () => location.href = "/login";
+        if (lo) lo.onclick = () => location.href = "/logout";
+        if (loginToComment) loginToComment.onclick = () => location.href = "/login";
+
+        document.addEventListener("click", function (e) {
+            if (!e.target.classList.contains("delete")) return;
+
+            const subject = e.target.dataset.subject;
+
+            fetch("/delete-post", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ subject })
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("Delete failed");
+                e.target.closest(".report").remove();
+            })
+            .catch(err => console.error(err));
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!e.target.classList.contains("delete2")) return;
+
+            const subject = e.target.dataset.subject;
+
+            fetch("/delete-post", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ subject })
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("Delete failed");
+                e.target.closest(".report").remove();
+                location.href = '/forum'
+            })
+            .catch(err => console.error(err));
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!e.target.classList.contains("delete3")) return;
+
+            const post_owner = e.target.dataset.owner;
+            const subject = e.target.dataset.subject;
+            const index = parseInt(e.target.dataset.index);
+
+            fetch("/delete-comment", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    post_owner,
+                    subject,
+                    index
+                })
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("Delete failed");
+                e.target.closest(".comment").remove();
+            })
+            .catch(console.error);
+        });
+
+        function togglePassword() {
+            const input = document.getElementById("password");
+            const toggle = document.querySelector(".toggle-password");
+
+            if (input.type === "password") {
+                input.type = "text";
+                toggle.textContent = "🙈";
+            } else {
+                input.type = "password";
+                toggle.innerHTML = "👁️";
+            }
+        }
+    </script>
+</body>
+
+</html>

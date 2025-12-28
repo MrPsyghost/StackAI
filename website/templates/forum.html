@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Forum | StackAI{% endblock %}
+{% block nav %}
+<div class="nav-left">
+    <img src="./static/favicon.png" id="logo">
+    <button id="h">Home</button>
+    <button id="f" disabled>Forum</button>
+</div>
+
+<div class="nav-right">
+    {% if session.get("user") %}
+    <h1 id="user">Hello, <strong>{{ session["user"] }}</strong></h1>
+    <button id="lo">Log Out</button>
+    {% else %}
+    <button id="su">Sign Up</button>
+    <button id="li">Log In</button>
+    {% endif %}
+</div>
+{% endblock %}
+{% block content %}
+<div id="forum">
+    <h1 class="forum-title">Forum</h1>
+
+    {% for report in reports %}
+    <div class="report">
+        {% if report[0] == session.get('user') or session.get('user') in admins %}
+        <button class="delete" data-subject="{{ report[1] }}">🗑</button>
+        {% endif %}
+
+        <div class="subject">
+            <h2>
+                <a href="/post/{{ report[0] }}/{{ report[1] }}">
+                    "{{ report[1] }}"
+                </a>
+                <span>by {{ report[0] }}</span>
+            </h2>
+        </div>
+
+        <div class="ai">
+            <strong>AI:</strong> {{ report[2] }}
+        </div>
+
+        <div class="details">
+            <strong>Description:</strong> {{ report[3] }}
+        </div>
+    </div>
+    {% endfor %}
+    {% if session.get("user") %}
+    <button id="add-report">+</button>
+    {% else %}
+    <button id="login-to-comment" style="background-color: white;"><strong>Login</strong> to comment</button>
+    {% endif %}
+</div>
+{% endblock %}

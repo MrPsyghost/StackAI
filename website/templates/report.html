@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Report | StackAI{% endblock %}
+{% block nav %}
+<div class="nav-left">
+    <img src="./static/favicon.png" id="logo">
+    <button id="h">Home</button>
+    <button id="f">Forum</button>
+</div>
+
+<div class="nav-right">
+    {% if session.get("user") %}
+    <h1 id="user">Hello, <strong>{{ session["user"] }}</strong></h1>
+    <button id="lo">Log Out</button>
+    {% else %}
+    <button id="su">Sign Up</button>
+    <button id="li">Log In</button>
+    {% endif %}
+</div>
+{% endblock %}
+{% block content %}
+<form action="/report" method="POST">
+    <h1>Report Bug</h1>
+    <label for="sub">Enter Subject</label>
+    <input type="text" name="sub" style="width: 75%;" placeholder="Enter Subject"required>
+    <label for="ai">Select AI</label>
+    <select name="ai" required>
+        <option value=none disabled selected></option>
+        <option value="ChatGPT">ChatGPT</option>
+        <option value="DeepSeek">DeepSeek</option>
+        <option value="Gemini">Gemini</option>
+    </select>
+    <label for="desc">Enter Description</label>
+    <textarea name="desc" style="width: 75%; resize: none;" rows="5" placeholder="Enter Description"></textarea>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

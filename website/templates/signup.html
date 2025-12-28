@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Sign Up | StackAI{% endblock %}
+{% block nav %}
+<div class="nav-left">
+    <img src="./static/favicon.png" id="logo">
+    <button id="h">Home</button>
+    <button id="f">Forum</button>
+</div>
+
+<div class="nav-right">
+    {% if session.get("user") %}
+    <h1 id="user">Hello, <strong>{{ session["user"] }}</strong></h1>
+    <button id="lo">Log Out</button>
+    {% else %}
+    <button id="su">Sign Up</button>
+    <button id="li">Log In</button>
+    {% endif %}
+</div>
+{% endblock %}
+{% block content %}
+{% if session.get("verification") %}
+<form action="/signup" method="POST">
+    <h1>Verify Account</h1>
+    <input name="code" type="text">
+    <button type="submit">Verify</button>
+</form>
+{% else %}
+<form action="/signup" method="POST">
+    <h1>Sign Up</h1>
+    <div class="input-group">
+        <span class="input-icon">🧑</span>
+        <input name="username" type="text" placeholder="Username" required>
+    </div>
+    <div class="input-group">
+        <span class="input-icon">✉️</span>
+        <input name="email" type="email" placeholder="E-mail" required>
+    </div>
+    <div class="input-group">
+        <span class="input-icon">🔐</span>
+        <input id="password" name="password" type="password" placeholder="Password" required>
+        <span class="toggle-password" onclick="togglePassword()">👁️</span>
+    </div>
+    <button type="submit">Create Account</button>
+</form>
+{% endif %}
+{% endblock %}

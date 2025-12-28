@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}StackAI{% endblock %}
+{% block nav %}
+<div class="nav-left">
+    <img src="./static/favicon.png" id="logo">
+    <button id="h" disabled>Home</button>
+    <button id="f">Forum</button>
+</div>
+
+<div class="nav-right">
+    {% if session.get("user") %}
+    <h1 id="user">Hello, <strong>{{ session["user"] }}</strong></h1>
+    <button id="lo">Log Out</button>
+    {% else %}
+    <button id="su">Sign Up</button>
+    <button id="li">Log In</button>
+    {% endif %}
+</div>
+{% endblock %}
+{% block content %}
+<div id="brand">
+    StackAI
+</div>
+<div id="moto">
+    <h1>Problems with AI? Can't get help?</h1>
+    <h1>Let's Solve Them Together!</h1>
+</div>
+<div id="desc">
+    StackAI is a people's forum where you can report bugs and discuss prompts about AI's developed by companies.
+</div>
+{% endblock %}
