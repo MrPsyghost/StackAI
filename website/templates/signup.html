@@ -8,7 +8,7 @@
 </div>
 
 <div class="nav-right">
-    {% if session.get("user") %}
+    {% if session.get("user") and session.get("user") in users %}
     <h1 id="user">Hello, <strong>{{ session["user"] }}</strong></h1>
     <button id="lo">Log Out</button>
     {% else %}
